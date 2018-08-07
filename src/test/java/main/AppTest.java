@@ -9,6 +9,7 @@ public class AppTest
 	@Test
 	public void testPrint()
 	{
-		assertFalse(true);
+		double o = 5 + 4/3;
+		System.out.println(o);
 	}
 }
