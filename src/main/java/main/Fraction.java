@@ -4,6 +4,7 @@ public class Fraction
 {
 	private final int numerator;
 	private final int denominator;
+	private final Sign sign;
 
 	public static Fraction of(int numerator, int denominator)
 	{
@@ -12,17 +13,18 @@ public class Fraction
 
 	private Fraction(int numerator, int denominator)
 	{
-		this.numerator = numerator;
-		this.denominator = denominator;
+		this.sign = Sign.get(numerator, denominator);
+		this.numerator = Math.abs(numerator);
+		this.denominator = Math.abs(denominator);
 	}
 
 	public Fraction add(Fraction f)
 	{
-		int newNumerator = numerator * f.denominator + denominator * f.numerator;
+		int newNumerator = numerator * sign.s * f.denominator + denominator * f.numerator * f.sign.s;
 		int newDenominator = denominator * f.denominator;
 		int gcd = calcGreatestCommonDivisor(newNumerator, newDenominator);
-		newNumerator = Math.abs(newNumerator / gcd);
-		newDenominator = Math.abs(newDenominator / gcd);
+		newNumerator = newNumerator / gcd;
+		newDenominator = newDenominator / gcd;
 		return new Fraction(newNumerator, newDenominator);
 	}
 
@@ -53,13 +55,28 @@ public class Fraction
 	{
 		return denominator;
 	}
-	public enum Sign
-	{
-		MINUS, PLUS;
-	}
 
 	public Sign sign()
 	{
-		return Sign.MINUS;
+		return sign;
+	}
+	public enum Sign
+	{
+		MINUS(-1), PLUS(1);
+		private final int s;
+
+		private Sign(int s)
+		{
+			this.s = s;
+		}
+
+		static Sign get(int numerator, int denominator)
+		{
+			if (numerator * denominator < 0)
+			{
+				return MINUS;
+			}
+			return PLUS;
+		}
 	}
 }

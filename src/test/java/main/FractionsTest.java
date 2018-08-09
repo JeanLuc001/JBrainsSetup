@@ -1,24 +1,21 @@
 package main;
 
+import static main.Fraction.Sign.MINUS;
+import static main.Fraction.Sign.PLUS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import  main.Fraction.Sign;
-import static main.Fraction.Sign.*;
+import main.Fraction.Sign;
 
 public class FractionsTest
 {
-	private void assertEqualFractions(Fraction f, int expectedNumerator, int expectedDenominator)
+	private void assertEqualFractions(Fraction f, int expectedNumerator, int expectedDenominator, Sign sign)
 	{
 		assertTrue("wrong numerator", f.numerator() == expectedNumerator);
 		assertTrue("wrong denominator", f.denominator() == expectedDenominator);
-	}
-
-	private void assertSign(Fraction f, Sign minus)
-	{
-		assertEquals("wrong sign", MINUS, f.sign());
+		assertEquals("wrong sign", sign, f.sign());
 	}
 
 	@Test
@@ -27,7 +24,7 @@ public class FractionsTest
 		Fraction f1 = Fraction.of(0, 1);
 		Fraction f2 = Fraction.of(0, 1);
 		Fraction added = f1.add(f2);
-		assertEqualFractions(added, 0, 1);
+		assertEqualFractions(added, 0, 1, PLUS);
 	}
 
 	@Test
@@ -36,7 +33,7 @@ public class FractionsTest
 		Fraction f1 = Fraction.of(7, 3);
 		Fraction f2 = Fraction.of(4, 5);
 		Fraction added = f1.add(f2);
-		assertEqualFractions(added, 47, 15);
+		assertEqualFractions(added, 47, 15, PLUS);
 	}
 
 	@Test
@@ -45,7 +42,7 @@ public class FractionsTest
 		Fraction f1 = Fraction.of(7, 3);
 		Fraction f2 = Fraction.of(5, 5);
 		Fraction added = f1.add(f2);
-		assertEqualFractions(added, 10, 3);
+		assertEqualFractions(added, 10, 3, PLUS);
 	}
 
 	@Test
@@ -54,7 +51,6 @@ public class FractionsTest
 		Fraction f1 = Fraction.of(-7, 3);
 		Fraction f2 = Fraction.of(5, 5);
 		Fraction added = f1.add(f2);
-		assertEqualFractions(added, 4, 3);
-		assertSign(added, Sign.MINUS);
+		assertEqualFractions(added, 4, 3, MINUS);
 	}
 }
