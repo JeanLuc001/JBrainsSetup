@@ -21,8 +21,8 @@ public class Fraction
 		int newNumerator = numerator * f.denominator + denominator * f.numerator;
 		int newDenominator = denominator * f.denominator;
 		int gcd = calcGreatestCommonDivisor(newNumerator, newDenominator);
-		newNumerator = newNumerator / gcd;
-		newDenominator = newDenominator / gcd;
+		newNumerator = Math.abs(newNumerator / gcd);
+		newDenominator = Math.abs(newDenominator / gcd);
 		return new Fraction(newNumerator, newDenominator);
 	}
 
@@ -52,5 +52,14 @@ public class Fraction
 	public int denominator()
 	{
 		return denominator;
+	}
+	public enum Sign
+	{
+		MINUS, PLUS;
+	}
+
+	public Sign sign()
+	{
+		return Sign.MINUS;
 	}
 }
