@@ -2,6 +2,9 @@ package main;
 
 public class Fraction
 {
+	private final int numerator;
+	private final int denominator;
+
 	public static Fraction of(int numerator, int denominator)
 	{
 		return new Fraction(numerator, denominator);
@@ -9,20 +12,24 @@ public class Fraction
 
 	private Fraction(int numerator, int denominator)
 	{
+		this.numerator = numerator;
+		this.denominator = denominator;
 	}
 
 	public Fraction add(Fraction f)
 	{
-		return this;
+		int newNumerator = numerator * f.denominator + denominator * f.numerator;
+		int newDenominator = denominator * f.denominator;
+		return new Fraction(newNumerator, newDenominator);
 	}
 
 	public int numerator()
 	{
-		return 0;
+		return numerator;
 	}
 
 	public int denominator()
 	{
-		return 1;
+		return denominator;
 	}
 }
