@@ -13,6 +13,10 @@ public class Fraction
 
 	private Fraction(int numerator, int denominator)
 	{
+		if (denominator == 0)
+		{
+			throw new IllegalArgumentException("denominator must not be zero");
+		}
 		this.sign = Sign.get(numerator, denominator);
 		this.numerator = Math.abs(numerator);
 		this.denominator = Math.abs(denominator);

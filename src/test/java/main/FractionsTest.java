@@ -18,6 +18,12 @@ public class FractionsTest
 		assertEquals("wrong sign", sign, f.sign());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void when_denominator_is_0_then_illegalArgumentException()
+	{
+		Fraction.of(5, 0);
+	}
+
 	@Test
 	public void when_adding_0_over_1_to_0_over_1_expect_0_over_1()
 	{
