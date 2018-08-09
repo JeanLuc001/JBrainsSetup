@@ -20,7 +20,28 @@ public class Fraction
 	{
 		int newNumerator = numerator * f.denominator + denominator * f.numerator;
 		int newDenominator = denominator * f.denominator;
+		int gcd = calcGreatestCommonDivisor(newNumerator, newDenominator);
+		newNumerator = newNumerator / gcd;
+		newDenominator = newDenominator / gcd;
 		return new Fraction(newNumerator, newDenominator);
+	}
+
+	/**
+	 * Euclidean algorithm
+	 * 
+	 * @param x1
+	 * @param x2
+	 * @return
+	 */
+	private static int calcGreatestCommonDivisor(int x1, int x2)
+	{
+		int x3 = 0;
+		while ((x3 = x1 % x2) != 0)
+		{
+			x1 = x2;
+			x2 = x3;
+		}
+		return x2;
 	}
 
 	public int numerator()
