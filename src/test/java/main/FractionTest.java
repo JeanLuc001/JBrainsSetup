@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import main.Fraction.Sign;
 
-public class FractionsTest
+public class FractionTest
 {
 	private void assertEqualFractions(Fraction f, int expectedNumerator, int expectedDenominator, Sign sign)
 	{
